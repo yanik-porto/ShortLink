@@ -37,6 +37,7 @@ add_library(ShortLinkLib STATIC
     ${ROOT_SOURCES_DIR}/URLCodec.cpp
     ${ROOT_SOURCES_DIR}/URLCutter.cpp
     ${ROOT_SOURCES_DIR}/HashToShortURLConverter.cpp
+    ${3RD_PARTIES_DIR}/catch.hpp
     )
 
 target_include_directories(${PROJECT_NAME}
