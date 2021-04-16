@@ -6,6 +6,8 @@ project(ShortLink LANGUAGES CXX)
 find_package(PkgConfig)
 pkg_check_modules(Pistache REQUIRED IMPORTED_TARGET libpistache)
 
+find_package(nlohmann_json REQUIRED)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -45,5 +47,5 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE ${ROOT_PRIVATE_INCLUDE_DIR}
     )
 
-target_link_libraries(${PROJECT_NAME} PkgConfig::Pistache ShortLinkLib)
+target_link_libraries(${PROJECT_NAME} PkgConfig::Pistache nlohmann_json::nlohmann_json ShortLinkLib)
 target_link_libraries(ShortLinkTests PkgConfig::Pistache ShortLinkLib)

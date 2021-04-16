@@ -3,6 +3,8 @@
 
 #include <functional>
 #include <string>
+#include <iostream>
+
 
 URLCodec::URLCodec(const std::string &domainUrl) :
     _domainUrl(domainUrl) {

@@ -26,7 +26,7 @@ TEST_CASE("Encode/Decode URL", "[Codec]") {
 
     auto decodedUrl = codec.Decode(encodedUrl);
     std::cout << decodedUrl << std::endl;
-    CHECK(decodedUrl == encodedUrl);
+    CHECK(decodedUrl == url);
 
 }
 

@@ -15,13 +15,12 @@ public:
      * @brief start the server
      */
     void Start();
-
-private:
-    IURLCodec *_codec;
 };
 
 class CodecHandler : public Http::Handler {
 public:
+    CodecHandler();
+    ~CodecHandler();
 
     HTTP_PROTOTYPE(CodecHandler)
 
@@ -31,6 +30,9 @@ public:
      * @param[out] response The http response to the request
      */
     void onRequest(const Http::Request& request, Http::ResponseWriter response) override;
+
+private:
+    IURLCodec *_codec;
 };
 
 #endif // SHORTLINKSERVER_H
