@@ -10,7 +10,7 @@ HashToShortURLConverter::~HashToShortURLConverter() {
 
 }
 
-std::string HashToShortURLConverter::HashToShortURL(unsigned int hash) {
+std::string HashToShortURLConverter::HashToShortURL(std::size_t hash) {
     char alphabet[] = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     std::string shortUrl;
@@ -23,6 +23,6 @@ std::string HashToShortURLConverter::HashToShortURL(unsigned int hash) {
     return shortUrl;
 }
 
-unsigned int HashToShortURLConverter::ShortURLToHash(const std::string &shortUrl) {
+std::size_t HashToShortURLConverter::ShortURLToHash(const std::string &shortUrl) {
 
 }
