@@ -11,6 +11,9 @@ public:
     ShortLinkServer();
     virtual ~ShortLinkServer();
 
+    /**
+     * @brief start the server
+     */
     void Start();
 
 private:
@@ -22,6 +25,11 @@ public:
 
     HTTP_PROTOTYPE(CodecHandler)
 
+    /**
+     * @brief listen the request and send the corresponding response
+     * @param[in]  request The http request received
+     * @param[out] response The http response to the request
+     */
     void onRequest(const Http::Request& request, Http::ResponseWriter response) override;
 };
 
