@@ -1,6 +1,8 @@
 #ifndef URLCODEC_H
 #define URLCODEC_H
 
+#include <map>
+
 #include "include/public/IURLCodec.h"
 
 /**
@@ -24,6 +26,9 @@ public:
      * @return the decoded original URL
      */
     virtual std::string Decode(const std::string &shortURL) override;
+
+private:
+    std::map<std::size_t, const std::string&> _hashToUrlMap;
 };
 
 #endif // URLCODEC_H
