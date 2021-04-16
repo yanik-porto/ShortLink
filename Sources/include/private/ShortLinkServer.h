@@ -2,6 +2,7 @@
 #define SHORTLINKSERVER_H
 
 #include <pistache/endpoint.h>
+#include "include/public/IURLCodec.h"
 
 using namespace Pistache;
 
@@ -9,7 +10,11 @@ class ShortLinkServer {
 public:
     ShortLinkServer();
     virtual ~ShortLinkServer();
+
     void Start();
+
+private:
+    IURLCodec *_codec;
 };
 
 class CodecHandler : public Http::Handler {

@@ -1,11 +1,15 @@
-#include "../include/private/ShortLinkServer.h"
+#include "include/private/ShortLinkServer.h"
+#include "include/private/URLCodec.h"
 
-ShortLinkServer::ShortLinkServer() {
+ShortLinkServer::ShortLinkServer() :
+    _codec(new URLCodec()){
 
 }
 
 ShortLinkServer::~ShortLinkServer() {
-
+    if(_codec) {
+        delete _codec;
+    }
 }
 
 void ShortLinkServer::Start() {
