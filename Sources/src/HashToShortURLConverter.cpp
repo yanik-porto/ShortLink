@@ -24,5 +24,15 @@ std::string HashToShortURLConverter::HashToShortURL(std::size_t hash) {
 }
 
 std::size_t HashToShortURLConverter::ShortURLToHash(const std::string &shortUrl) {
+    std::size_t hash;
+    for (char const &c: shortUrl) {
+        if ('a' <= c  && c <= 'z') {
+            hash = hash * 36 + c - 'a';
+        }
+        if ('0' <= c && c <= '9') {
+            hash = hash * 36 + c - '0' + 26;
+        }
+    }
 
+    return hash;
 }

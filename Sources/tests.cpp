@@ -12,15 +12,21 @@ TEST_CASE("HashToURL", "[HashURLConversion]") {
     CHECK(HashToShortURLConverter::HashToShortURL(1)  == "b");
 }
 
-TEST_CASE("Encode URL", "[Codec]") {
+TEST_CASE("Encode/Decode URL", "[Codec]") {
 
     std::string url = "https://codereview.stackexchange.com/questions/173618/generate-a-unique-numeric-identifier-for-each-instance-of-a-class/173635";
 
     std::string domainUrl = "http://short.est/";
     URLCodec codec(domainUrl);
-    auto shortUrl = codec.Encode(url);
+    auto encodedUrl = codec.Encode(url);
 
-    std::cout << shortUrl << std::endl;
-    CHECK(!shortUrl.empty());
-    CHECK(shortUrl.find(domainUrl) != std::string::npos);
+    std::cout << encodedUrl << std::endl;
+    CHECK(!encodedUrl.empty());
+    CHECK(encodedUrl.find(domainUrl) != std::string::npos);
+
+    auto decodedUrl = codec.Decode(encodedUrl);
+    std::cout << decodedUrl << std::endl;
+    CHECK(decodedUrl == encodedUrl);
+
 }
+
