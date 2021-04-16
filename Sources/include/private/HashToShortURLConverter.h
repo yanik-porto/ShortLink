@@ -16,14 +16,14 @@ public:
      * @param[in] hash The url hash to convert
      * @return the corresponding short url
      */
-    std::string HashToShortURL(unsigned int hash) const;
+    static std::string HashToShortURL(unsigned int hash);
 
     /**
      * @brief convert the short URL back to the corresponding hash
      * @param[in] shortUrl The short url to convert
      * @return the corresponding hash
      */
-    unsigned int ShortURLToHash(const std::string &shortUrl) const;
+    static unsigned int ShortURLToHash(const std::string &shortUrl);
 };
 
 #endif // URLTOHASHCONVERTER_H
