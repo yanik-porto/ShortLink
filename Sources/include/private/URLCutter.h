@@ -1,7 +1,7 @@
 #ifndef URLCUTTER_H
 #define URLCUTTER_H
 
-#include <iostream>
+#include <string>
 
 #include "include/public/IURLCutter.h"
 
