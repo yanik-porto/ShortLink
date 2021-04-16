@@ -1,6 +1,9 @@
 #ifndef IURLCODEC_H
 #define IURLCODEC_H
 
+/**
+ * @brief The IURLCodec astract class encodes and decodes URL to and from a shorter version
+ */
 class IURLCodec {
 public:
     virtual ~IURLCodec() {};

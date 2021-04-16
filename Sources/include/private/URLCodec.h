@@ -4,7 +4,7 @@
 #include "include/public/IURLCodec.h"
 
 /**
- * @brief The URLCodec class encodes and decodes URL to and from a shorter version
+ * @brief The URLCodec concrete class encodes and decodes URL to and from a shorter version
  */
 class URLCodec : public IURLCodec {
 public:

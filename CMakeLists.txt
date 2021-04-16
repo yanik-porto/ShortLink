@@ -28,10 +28,13 @@ include_directories(${CMAKE_HEADER_DIR} ${CMAKE_INCLUDE_PATH})
 
 add_library(ShortLinkLib STATIC
     ${ROOT_PUBLIC_INCLUDE_DIR}/IURLCodec.h
+    ${ROOT_PUBLIC_INCLUDE_DIR}/IURLCutter.h
+    ${ROOT_PRIVATE_INCLUDE_DIR}/URLCutter.h
     ${ROOT_PRIVATE_INCLUDE_DIR}/URLCodec.h
     ${ROOT_PRIVATE_INCLUDE_DIR}/ShortLinkServer.h
     ${ROOT_SOURCES_DIR}/ShortLinkServer.cpp
     ${ROOT_SOURCES_DIR}/URLCodec.cpp
+    ${ROOT_SOURCES_DIR}/URLCutter.cpp
     )
 
 target_include_directories(${PROJECT_NAME}
