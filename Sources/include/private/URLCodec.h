@@ -10,7 +10,7 @@
  */
 class URLCodec : public IURLCodec {
 public:
-    URLCodec();
+    explicit URLCodec(const std::string &domainUrl);
     virtual ~URLCodec();
 
     /**
@@ -28,6 +28,7 @@ public:
     virtual std::string Decode(const std::string &shortURL) override;
 
 private:
+    std::string _domainUrl;
     std::map<std::size_t, const std::string&> _hashToUrlMap;
 };
 

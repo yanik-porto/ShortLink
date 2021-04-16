@@ -16,8 +16,11 @@ TEST_CASE("Encode URL", "[Codec]") {
 
     std::string url = "https://codereview.stackexchange.com/questions/173618/generate-a-unique-numeric-identifier-for-each-instance-of-a-class/173635";
 
-    URLCodec codec;
+    std::string domainUrl = "http://short.est/";
+    URLCodec codec(domainUrl);
     auto shortUrl = codec.Encode(url);
 
+    std::cout << shortUrl << std::endl;
     CHECK(!shortUrl.empty());
+    CHECK(shortUrl.find(domainUrl) != std::string::npos);
 }

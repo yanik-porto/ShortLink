@@ -2,7 +2,7 @@
 #include "include/private/URLCodec.h"
 
 ShortLinkServer::ShortLinkServer() :
-    _codec(new URLCodec()){
+    _codec(new URLCodec("http://short.est/")){
 
 }
 
