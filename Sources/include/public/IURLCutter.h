@@ -13,7 +13,7 @@ public:
      * @param fullUrl The full website URL
      * @return the corresponding website shorten URI
      */
-    std::string GetURI(const std::string &fullUrl);
+    virtual std::string GetURI(const std::string &fullUrl) = 0;
 };
 
 #endif // IURLCUTTER_H

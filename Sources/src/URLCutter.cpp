@@ -8,3 +8,7 @@ URLCutter::URLCutter(const std::string &domainName) :
 URLCutter::~URLCutter() {
 
 }
+
+std::string URLCutter::GetURI(const std::string &fullUrl) {
+
+}

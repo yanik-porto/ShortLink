@@ -13,6 +13,8 @@ public:
     explicit URLCutter(const std::string &domainName);
     ~URLCutter();
 
+    std::string GetURI(const std::string &fullUrl) ;
+
 private:
     std::string _domainName;
 };
