@@ -8,10 +8,11 @@ URLCodec::~URLCodec() {
 
 }
 
-void URLCodec::decode() {
+std::string URLCodec::Encode(const std::string &originalURL) {
 
 }
 
-void URLCodec::encode() {
+std::string URLCodec::Decode(const std::string &shortURL) {
 
 }
+
