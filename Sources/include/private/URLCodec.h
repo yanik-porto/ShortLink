@@ -29,7 +29,7 @@ public:
 
 private:
     std::string _domainUrl;
-    std::map<std::size_t, const std::string&> _hashToUrlMap;
+    std::map<std::size_t, std::string> _hashToUrlMap;
 };
 
 #endif // URLCODEC_H

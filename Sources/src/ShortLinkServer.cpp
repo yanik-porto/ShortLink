@@ -38,7 +38,6 @@ void CodecHandler::onRequest(const Http::Request& request, Http::ResponseWriter 
 
                 nlohmann::json jsonRes;
                 jsonRes["shortUrl"] = shortUrl;
-
                 response.send(Http::Code::Ok, jsonRes.dump(), MIME(Text, Json));
             }
 
@@ -51,7 +50,6 @@ void CodecHandler::onRequest(const Http::Request& request, Http::ResponseWriter 
 
                 nlohmann::json jsonRes;
                 jsonRes["url"] = decodedUrl;
-
                 response.send(Http::Code::Ok, jsonRes.dump(), MIME(Text, Json));
             }
         }

@@ -19,7 +19,7 @@ std::string URLCodec::Encode(const std::string &originalURL) {
 
     std::size_t hash = std::hash<std::string>{}(originalURL);
     auto shortUrl = HashToShortURLConverter::HashToShortURL(hash);
-    _hashToUrlMap.emplace(hash, originalURL);
+    _hashToUrlMap.emplace(hash, std::string(originalURL));
     return _domainUrl + shortUrl;
 }
 
@@ -33,6 +33,8 @@ std::string URLCodec::Decode(const std::string &shortURL) {
     auto it = _hashToUrlMap.find(hash);
     if (it != _hashToUrlMap.end()) {
         return it->second;
+    } else {
+        return std::string();
     }
 }
 
