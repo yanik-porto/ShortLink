@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(ShortLink Sources/main.cpp)
+add_executable(ShortLinkTests Sources/tests.cpp)
 
 get_filename_component(
     PROJECT_DIR
@@ -23,8 +24,9 @@ set (CMAKE_INCLUDE_PATH ${CMAKE_HEADER_DIR}/include)
 set (ROOT_PUBLIC_INCLUDE_DIR ${CMAKE_INCLUDE_PATH}/public)
 set (ROOT_PRIVATE_INCLUDE_DIR ${CMAKE_INCLUDE_PATH}/private)
 set (ROOT_SOURCES_DIR ${CMAKE_SOURCE_DIR}/src)
+set (3RD_PARTIES_DIR ${PROJECT_DIR}/3rdParties)
 
-include_directories(${CMAKE_HEADER_DIR} ${CMAKE_INCLUDE_PATH})
+include_directories(${PROJECT_DIR} ${CMAKE_HEADER_DIR} ${CMAKE_INCLUDE_PATH})
 
 add_library(ShortLinkLib STATIC
     ${ROOT_PUBLIC_INCLUDE_DIR}/IURLCodec.h
@@ -47,3 +49,4 @@ target_include_directories(${PROJECT_NAME}
     )
 
 target_link_libraries(${PROJECT_NAME} PkgConfig::Pistache ShortLinkLib)
+target_link_libraries(ShortLinkTests PkgConfig::Pistache ShortLinkLib)

@@ -2,8 +2,8 @@
 
 #include "include/private/ShortLinkServer.h"
 
-int main()
-{
+int main() {
+
     ShortLinkServer server;
     server.Start();
     return 0;
