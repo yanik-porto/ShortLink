@@ -19,6 +19,7 @@ ShortLinkServer::~ShortLinkServer() {
 }
 
 void ShortLinkServer::Start() {
+        std::cout << "Serving the API on http://localhost:9080/" << std::endl;
         _server->serve();
 }
 
