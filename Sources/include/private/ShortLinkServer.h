@@ -15,6 +15,9 @@ public:
      * @brief start the server
      */
     void Start();
+
+private:
+    Http::Endpoint *_server;
 };
 
 class CodecHandler : public Http::Handler {

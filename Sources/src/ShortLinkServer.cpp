@@ -4,16 +4,22 @@
 #include <nlohmann/json.hpp>
 
 ShortLinkServer::ShortLinkServer() {
-
+    Address addr(Ipv4::any(), Port(9080));
+    auto opts = Http::Endpoint::options().threads(2);
+    _server = new Http::Endpoint(addr);
+    _server->init(opts);
+    _server->setHandler(Http::make_handler<CodecHandler>());
 }
 
 ShortLinkServer::~ShortLinkServer() {
-
+    if(_server) {
+        _server->shutdown();
+        delete _server;
+    }
 }
 
 void ShortLinkServer::Start() {
-        Address addr(Ipv4::any(), Port(9080));
-        Http::listenAndServe<CodecHandler>(addr);
+        _server->serve();
 }
 
 CodecHandler::CodecHandler() :

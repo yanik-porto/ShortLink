@@ -73,4 +73,6 @@ Thumbs.db
 
 *.txt.user
 build-*
+build/
+.cmake*
 
