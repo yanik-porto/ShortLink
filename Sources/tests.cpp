@@ -41,9 +41,11 @@ size_t WriteCallback (char *contents, size_t size, size_t nmemb, void *userp)
     return size * nmemb;
 };
 
-TEST_CASE("Server", "[Server]") {
-    std::string jsonstr = "{\"url\":\"https://github.com/pistacheio/pistache/blob/master/examples/http_server.cc\"}";
-    std::string url = "https://github.com/pistacheio/pistache/blob/master/examples/http_server.cc";
+std::string urlStr = "https://github.com/pistacheio/pistache/blob/master/examples/http_server.cc";
+std::string shortUrlStr = "http://short.est/rQrVIOEFzIg";
+
+TEST_CASE("Encoding", "[Server]") {
+    std::string jsonstr = "{\"url\":\"" + urlStr + "\"}";
 
     CURL *curl;
     CURLcode res;
@@ -51,15 +53,11 @@ TEST_CASE("Server", "[Server]") {
     struct curl_slist *headers=NULL; // init to NULL is important
     std::ostringstream oss;
 
-    nlohmann::json jsonReq;
-    jsonReq["url"] = url;
-
     curl = curl_easy_init();
     if(curl) {
       curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:9080/encode");
       curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
       curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonstr.c_str());
-      std::cout << jsonReq.dump().c_str() << std::endl;
 
       std::string readBuffer;
       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
@@ -74,6 +72,49 @@ TEST_CASE("Server", "[Server]") {
                 curl_easy_strerror(res));
       } else {
           std::cout << "body response : " << readBuffer << std::endl;
+          auto jsonBody = nlohmann::json::parse(readBuffer);
+          if (jsonBody.find("shortUrl") != jsonBody.end()) {
+              auto shortUrl = jsonBody["shortUrl"];
+              CHECK( shortUrl == shortUrlStr );
+          }
+      }
+
+      /* always cleanup */
+      curl_easy_cleanup(curl);
+    }
+}
+
+TEST_CASE("Decoding", "[Server]") {
+    std::string jsonstr = "{\"shortUrl\":\"" + shortUrlStr + "\"}";
+
+    CURL *curl;
+    CURLcode res;
+
+    struct curl_slist *headers=NULL; // init to NULL is important
+    std::ostringstream oss;
+
+    curl = curl_easy_init();
+    if(curl) {
+      curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:9080/decode");
+      curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonstr.c_str());
+
+      std::string readBuffer;
+      curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+      curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+      res = curl_easy_perform(curl);
+
+      /* Check for errors */
+      if(res != CURLE_OK) {
+        fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                curl_easy_strerror(res));
+      } else {
+          std::cout << "body response : " << readBuffer << std::endl;
+          auto jsonBody = nlohmann::json::parse(readBuffer);
+          if (jsonBody.find("url") != jsonBody.end()) {
+              auto originalUrl = jsonBody["url"];
+              CHECK( originalUrl == urlStr );
+          }
       }
 
       /* always cleanup */

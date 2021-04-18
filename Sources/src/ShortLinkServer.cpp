@@ -37,7 +37,7 @@ CodecHandler::~CodecHandler() {
 void CodecHandler::onRequest(const Http::Request& request, Http::ResponseWriter response) {
 
     if(request.resource() == "/encode") {
-        if (request.method() == Http::Method::Get) {
+        if (request.method() == Http::Method::Post) {
             auto jsonBody = nlohmann::json::parse(request.body());
             if (jsonBody.find("url") != jsonBody.end()) {
                 auto shortUrl = _codec->Encode(jsonBody["url"]);
@@ -46,10 +46,9 @@ void CodecHandler::onRequest(const Http::Request& request, Http::ResponseWriter 
                 jsonRes["shortUrl"] = shortUrl;
                 response.send(Http::Code::Ok, jsonRes.dump(), MIME(Text, Json));
             }
-
         }
     } else if (request.resource() == "/decode") {
-        if (request.method() == Http::Method::Get) {
+        if (request.method() == Http::Method::Post) {
             auto jsonBody = nlohmann::json::parse(request.body());
             if (jsonBody.find("shortUrl") != jsonBody.end()) {
                 auto decodedUrl = _codec->Decode(jsonBody["shortUrl"]);
