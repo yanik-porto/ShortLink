@@ -64,9 +64,6 @@ TEST_CASE("Encoding", "[Server]") {
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
       res = curl_easy_perform(curl);
 
-
-
-      /* Check for errors */
       if(res != CURLE_OK) {
         fprintf(stderr, "curl_easy_perform() failed: %s\n",
                 curl_easy_strerror(res));
@@ -104,12 +101,10 @@ TEST_CASE("Decoding", "[Server]") {
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
       res = curl_easy_perform(curl);
 
-      /* Check for errors */
       if(res != CURLE_OK) {
         fprintf(stderr, "curl_easy_perform() failed: %s\n",
                 curl_easy_strerror(res));
       } else {
-          std::cout << "body response : " << readBuffer << std::endl;
           auto jsonBody = nlohmann::json::parse(readBuffer);
           if (jsonBody.find("url") != jsonBody.end()) {
               auto originalUrl = jsonBody["url"];
@@ -117,7 +112,6 @@ TEST_CASE("Decoding", "[Server]") {
           }
       }
 
-      /* always cleanup */
       curl_easy_cleanup(curl);
     }
 }

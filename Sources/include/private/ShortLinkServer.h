@@ -6,6 +6,9 @@
 
 using namespace Pistache;
 
+/**
+ * @brief The ShortLinkServer class runs the server listening and responding to encoding and responding endpoints
+ */
 class ShortLinkServer {
 public:
     ShortLinkServer();
@@ -20,6 +23,9 @@ private:
     Http::Endpoint *_server;
 };
 
+/**
+ * @brief The CodecHandler class handles the endpoints /encode and /decode
+ */
 class CodecHandler : public Http::Handler {
 public:
     CodecHandler();
