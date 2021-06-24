@@ -1,33 +1,50 @@
-### Objective
-
-Your assignment is to implement a URL shortening service using C++ and any framework.
-
-### Brief
+## Brief
 
 ShortLink is a URL shortening service where you enter a URL such as https://codesubmit.io/library/react and it returns a short URL such as http://short.est/GeAi9K.
 
-### Tasks
+## Dependencies
 
--   Implement assignment using:
-    -   Language: **C++**
-    -   Framework: **any framework**
-    -   Two endpoints are required
-        -   /encode - Encodes a URL to a shortened URL
-        -   /decode - Decodes a shortened URL to its original URL.
-    -   Both endpoints should return JSON
--   There is no restriction on how your encode/decode algorithm should work. You just need to make sure that a URL can be encoded to a short URL and the short URL can be decoded to the original URL. **You do not need to persist short URLs to a database. Keep them in memory.**
--   Provide detailed instructions on how to run your assignment in a separate markdown file
--   Provide API tests for both endpoints
+The code can be compiled with a C++!17 compiler. 
+Here is the list of commands to run in a linux terminal in order to install the dependencies.
 
-### Evaluation Criteria
+### cmake
 
--   **C++** best practices
--   API implemented featuring a /encode and /decode endpoint
+sudo apt-get update -y
+sudo apt-get install -y cmake
 
-### CodeSubmit
+### pistache : the chosen framework
 
-Please organize, design, test and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
+$ sudo add-apt-repository ppa:pistache+team/unstable
+$ sudo apt update
+$ sudo apt install libpistache-dev
 
-All the best and happy coding,
+### nlohmann_json : a json parser
 
-The Oodrive Team
+sudo apt-get update -y
+sudo apt-get install -y nlohmann-json-dev
+
+### libcurl : send http request for testing the API
+
+$ sudo apt update
+$ sudo apt upgrade
+$ sudo apt install curl libcurl4-openssl-dev
+
+
+
+
+## Running the code
+
+Compile the code by with the help of the CMakeList.txt file.
+
+Two executables and a library are provided.
+The library ShortLinkLib provides an API with /decode /encode endpoints. 
+The ShortLink executable runs the server.
+The ShortLinkTests executable runs tests on the server enpoints.
+
+Runs ShortLink executable for starting the server and either runs the ShortLinkTests executable or send http requests with curl or Postman for example.
+
+Encoding request example :
+curl -d '{"url":"https://github.com/pistacheio/pistache/blob/master/examples/http_server.cc"}' -X POST http://localhost:9080/encode
+
+Decoding request example : 
+curl -d '{"shortUrl":"http://short.est/rQrVIOEFzIg"}' -X POST http://localhost:9080/decode
